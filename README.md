@@ -3,6 +3,7 @@
 Competition write-ups and scored baselines. One folder per contest. Data stays on Kaggle; this repo only keeps code and notes.
 
 I am using Playground Series as the on-ramp — monthly tabular problems, no prize money, same submission loop as the rest of the site.
+한국어: [README.ko.md](README.ko.md)
 
 ## Competitions
 
