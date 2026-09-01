@@ -9,7 +9,7 @@ I am using Playground Series as the on-ramp — monthly tabular problems, no pri
 
 | Folder | Contest | Task | Metric | Public LB | Notes |
 | --- | --- | --- | ---: | ---: | --- |
-| [`playground-series-s6e9`](playground-series-s6e9/) | [S6E9 — Predicting Electric Vehicle Purchases](https://www.kaggle.com/competitions/playground-series-s6e9) | binary classification | ROC AUC | 0.94206 | HistGB → LGBM + interactions, 2026-09-01 |
+| [`playground-series-s6e9`](playground-series-s6e9/) | [S6E9 — Predicting Electric Vehicle Purchases](https://www.kaggle.com/competitions/playground-series-s6e9) | binary classification | ROC AUC | 0.94342 | synthetic value-frequency features, 2026-09-01 |
 
 ## Layout
 
