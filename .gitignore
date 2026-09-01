@@ -19,3 +19,4 @@ data/
 *.pkl
 oof/
 runs/
+*.npy

@@ -8,14 +8,15 @@ I am using Playground Series as the on-ramp — monthly tabular problems, no pri
 
 | Folder | Contest | Task | Metric | Public LB | Notes |
 | --- | --- | --- | ---: | ---: | --- |
-| [`playground-series-s6e9`](playground-series-s6e9/) | [S6E9 — Predicting Electric Vehicle Purchases](https://www.kaggle.com/competitions/playground-series-s6e9) | binary classification | ROC AUC | 0.94147 | first submission, sklearn HistGB, 2026-09-01 |
+| [`playground-series-s6e9`](playground-series-s6e9/) | [S6E9 — Predicting Electric Vehicle Purchases](https://www.kaggle.com/competitions/playground-series-s6e9) | binary classification | ROC AUC | 0.94206 | HistGB → LGBM + interactions, 2026-09-01 |
 
 ## Layout
 
 ```
 playground-series-s6e9/   # slug from the Kaggle URL
-  README.md               # problem, score, what I actually tried
-  baseline.py             # the run that was submitted
+  README.md               # problem, score, keep/discard log
+  baseline.py             # first submission (sklearn HistGB)
+  exp_*.py                # later scored runs
 ```
 
 Later contests follow the same slug. Shared Python deps live in `requirements.txt` at the root until a contest needs its own.
