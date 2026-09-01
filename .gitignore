@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Kaggle credentials and caches
+.kaggle/
+kaggle.json
+access_token
+
+# Competition data (download via the Kaggle API)
+data/
+*.csv
+*.zip
+
+# Local experiment dumps
+*.joblib
+*.pkl
+oof/
+runs/
