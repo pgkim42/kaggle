@@ -29,8 +29,10 @@ Submission `55962266` on 2026-09-02.
 | blend 0.7 LGBM + 0.3 XGB | OOF mix of the two | 0.94222 | 0.94207 | public flat; not the reference |
 | `exp_lgbm_freq.py` | fold-safe income/commute frequencies + floor flags | 0.94332 | 0.94342 | keep |
 | `exp_lgbm_te.py` | same, plus fold-safe smoothed buy-rate per income/commute value | **0.94361** | **0.94406** | keep |
+| `exp_lgbm_digits.py` | TE recipe + income ones/tens/hundreds digits as categoricals | 0.94358 | — | discard (flat/down) |
 
 Trees already match cell means (subsidy × env) to ~0.0004. Train/test adversarial AUC is 0.50. The leftover signal is synthetic: income is all integers, `30000` appears 61,605 times at 4.4% buy rate, commute `5.0` appears 144k times. Frequency captures the floors; target encoding captures that two incomes of similar magnitude can have 0.4% vs 75% buy rates.
+Income last-three digits as extra categoricals did not move OOF (0.94361 → 0.94358). Value-level target encoding already covers frequent incomes; leftover rare-income ranking is not a 0–9 digit the tree can use on top of that.
 
 ## Task
 
