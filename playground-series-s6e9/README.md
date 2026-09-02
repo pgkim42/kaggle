@@ -3,7 +3,7 @@
 Participation log for [Kaggle Playground Series S6E9](https://www.kaggle.com/competitions/playground-series-s6e9). Tabular binary classification: predict `Will_Buy_EV` probability. Metric is **ROC AUC**. Deadline 2026-09-30 23:59 UTC. Public LB is 20% of test.
 한국어: [README.ko.md](README.ko.md)
 
-This is not a winning solution. One change per run; keep only if 5-fold OOF rises.
+This is not a winning solution. One change per run; keep only if 5-fold OOF rises. After the score is in: update this file and README.ko.md, commit, push. Do not wait.
 
 ## Result
 

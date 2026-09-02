@@ -21,6 +21,7 @@ playground-series-s6e9/   # slug from the Kaggle URL
 ```
 
 Later contests follow the same slug. Shared Python deps live in `requirements.txt` at the root until a contest needs its own.
+After each scored run, in the same turn: update both contest READMEs (and the root table if public LB changed), commit, and `git push origin main`. Do not wait to be asked. Data, submissions, and OOF arrays stay out of git.
 
 ## Setup
 

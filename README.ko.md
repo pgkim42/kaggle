@@ -31,6 +31,7 @@ playground-series-s6e9/   # 캐글 주소의 이름 그대로
 ```
 
 다음 대회는 `playground-series-s6e10/`처럼 폴더만 추가한다. 공통 패키지는 루트 `requirements.txt`.
+실험 한 번 끝나면 같은 턴에서: 대회 README 둘 다 고치고 (공개 점수가 바뀌면 루트 표도), 커밋하고, `git push origin main`. 시키지 않아도 한다. 데이터·제출 CSV·OOF 배열은 깃에 넣지 않는다.
 
 ## 준비
 
