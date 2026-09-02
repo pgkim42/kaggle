@@ -7,16 +7,16 @@ This is not a winning solution. One change per run; keep only if 5-fold OOF rise
 
 ## Result
 
-Best scored run so far: `exp_lgbm_freq.py`.
+Best scored run so far: `exp_lgbm_te.py`.
 
 | Split | ROC AUC |
 | --- | ---: |
-| 5-fold OOF | 0.94332 |
-| Public leaderboard | **0.94342** |
+| 5-fold OOF | 0.94361 |
+| Public leaderboard | **0.94406** |
 
-Submission `55941527` on 2026-09-01.
+Submission `55962266` on 2026-09-02.
 
-## Runs (2026-09-01)
+## Runs
 
 | Script | Change vs previous keep | OOF | Public | Decision |
 | --- | --- | ---: | ---: | --- |
@@ -27,9 +27,10 @@ Submission `55941527` on 2026-09-01.
 | `exp_lgbm_slow.py` | same features, `lr=0.03`, 2000 trees | 0.94214 | 0.94206 | keep |
 | `exp_xgb_slow.py` | XGBoost, same features/schedule | 0.94192 | — | discard vs LGBM |
 | blend 0.7 LGBM + 0.3 XGB | OOF mix of the two | 0.94222 | 0.94207 | public flat; not the reference |
-| `exp_lgbm_freq.py` | fold-safe income/commute frequencies + floor flags | **0.94332** | **0.94342** | keep |
+| `exp_lgbm_freq.py` | fold-safe income/commute frequencies + floor flags | 0.94332 | 0.94342 | keep |
+| `exp_lgbm_te.py` | same, plus fold-safe smoothed buy-rate per income/commute value | **0.94361** | **0.94406** | keep |
 
-Trees already match cell means (subsidy × env) to ~0.0004. Train/test adversarial AUC is 0.50. The leftover signal is synthetic: income is all integers, `30000` appears 61,605 times at 4.4% buy rate, commute `5.0` appears 144k times. Value frequency beats another GBDT.
+Trees already match cell means (subsidy × env) to ~0.0004. Train/test adversarial AUC is 0.50. The leftover signal is synthetic: income is all integers, `30000` appears 61,605 times at 4.4% buy rate, commute `5.0` appears 144k times. Frequency captures the floors; target encoding captures that two incomes of similar magnitude can have 0.4% vs 75% buy rates.
 
 ## Task
 
@@ -52,14 +53,15 @@ Univariate AUCs on train: environmental concern 0.844, subsidy 0.718, income 0.6
 
 First file, `baseline.py`: HistGradientBoosting because this machine lacked `libgomp`. Later runs use LightGBM after OpenMP was installed.
 
-Kept recipe in `exp_lgbm_freq.py`:
+Kept recipe in `exp_lgbm_te.py`:
 
 1. Map `Will_Buy_EV` to `{Yes: 1, No: 0}`.
 2. Add `subsidy_yes`, `env_x_subsidy`, `income_x_subsidy`, `env_x_income`, plus flags for income `30000` and commute `5.0`.
 3. Count how often each income and commute value appears **inside the current training fold only** (and map the same counts onto validation/test).
-4. Ordinal-encode categoricals.
-5. LightGBM, `learning_rate=0.03`, `n_estimators=2000`, early stopping 50, `max_depth=6`, same 5 stratified folds (`random_state=42`).
-6. Average test probabilities across folds.
+4. Same fold: smoothed mean buy rate per income and commute value (`m=20`). Unseen values get the fold mean.
+5. Ordinal-encode categoricals.
+6. LightGBM, `learning_rate=0.03`, `n_estimators=2000`, early stopping 50, `max_depth=6`, same 5 stratified folds (`random_state=42`).
+7. Average test probabilities across folds.
 
 ## Setup
 
@@ -69,7 +71,7 @@ From the repo root. Competition data is **not** committed.
 pip install -r requirements.txt
 kaggle competitions download -c playground-series-s6e9 -p playground-series-s6e9/data
 python -c "import zipfile; zipfile.ZipFile('playground-series-s6e9/data/playground-series-s6e9.zip').extractall('playground-series-s6e9/data')"
-python playground-series-s6e9/exp_lgbm_freq.py
+python playground-series-s6e9/exp_lgbm_te.py
 ```
 
 Scripts look for `data/train.csv` next to themselves.
