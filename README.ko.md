@@ -16,7 +16,7 @@
 
 | 폴더 | 대회 | 하는 일 | 점수 방식 | 공개 점수 | 메모 |
 | --- | --- | --- | ---: | ---: | --- |
-| [`playground-series-s6e9`](playground-series-s6e9/) | [S6E9 — 전기차 구매 예측](https://www.kaggle.com/competitions/playground-series-s6e9) | 살지 말지 | ROC AUC | 0.94412 | 2026-09-02, 연습+시험지 값 빈도 |
+| [`playground-series-s6e9`](playground-series-s6e9/) | [S6E9 — 전기차 구매 예측](https://www.kaggle.com/competitions/playground-series-s6e9) | 살지 말지 | ROC AUC | 0.94533 | 2026-09-02, 전체빈도 LGBM + 자릿수 XGB 혼합 |
 
 대회 설명이 필요하면 [한국어 대회 노트](playground-series-s6e9/README.ko.md)부터 읽으면 된다.
 

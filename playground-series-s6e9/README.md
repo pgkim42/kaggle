@@ -7,14 +7,14 @@ This is not a winning solution. One change per run; keep only if 5-fold OOF rise
 
 ## Result
 
-Best scored run so far: `exp_lgbm_allfreq.py`.
+Best scored run so far: blend 0.6 public XGB digits + 0.4 `exp_lgbm_allfreq.py`.
 
 | Split | ROC AUC |
 | --- | ---: |
-| 5-fold OOF | 0.94371 |
-| Public leaderboard | **0.94412** |
+| 5-fold OOF (blend vs train labels) | 0.94540 |
+| Public leaderboard | **0.94533** |
 
-Submission `55962917` on 2026-09-02.
+Submission `55963255` on 2026-09-02.
 
 ## Runs
 
@@ -31,11 +31,15 @@ Submission `55962917` on 2026-09-02.
 | `exp_lgbm_te.py` | same, plus fold-safe smoothed buy-rate per income/commute value | 0.94361 | 0.94406 | keep |
 | `exp_lgbm_digits.py` | TE recipe + income ones/tens/hundreds digits as categoricals | 0.94358 | — | discard (flat/down) |
 | `exp_lgbm_orig.py` | TE recipe + original survey rows in train folds only | 0.94363 | — | discard (one fold down; not submitted) |
-| `exp_lgbm_allfreq.py` | TE recipe + train+test frequency of every static column | **0.94371** | **0.94412** | keep |
+| `exp_lgbm_allfreq.py` | TE recipe + train+test frequency of every static column | 0.94371 | 0.94412 | keep |
+| `exp_xgb_digits.py` | XGB: interactions + every numeric digit + train+test freqs | 0.94439 | 0.94437 | keep |
+| blend 0.55 our XGB + 0.45 allfreq | OOF mix of those two | 0.94525 | 0.94529 | keep |
+| blend 0.6 public XGB + 0.4 allfreq | mix with [evgendvorkin XGB](https://www.kaggle.com/code/evgendvorkin/s6e9-single-xgb-oof-auc-0-94466) | **0.94540** | **0.94533** | keep |
 
 Trees already match cell means (subsidy × env) to ~0.0004. Train/test adversarial AUC is 0.50. The leftover signal is synthetic: income is all integers, `30000` appears 61,605 times at 4.4% buy rate, commute `5.0` appears 144k times. Frequency captures the floors; target encoding captures that two incomes of similar magnitude can have 0.4% vs 75% buy rates.
 Income last-three digits as extra categoricals did not move OOF (0.94361 → 0.94358). Value-level target encoding already covers frequent incomes; leftover rare-income ranking is not a 0–9 digit the tree can use on top of that.
 Adding original survey rows (10k) into training folds only was +0.00002 OOF with a down fold, so not submitted. Counting how often every static value appears in train+test (unsupervised) lifted all five folds.
+Income ones/tens/hundreds as extra cats did nothing. Extracting **every** digit of every numeric (`x // 10^k % 10` for k=-4..3) plus train+test frequency of those columns is the XGB jump (OOF 0.94439). Mixing that with allfreq LGBM beats either alone. The public notebook is the same recipe at 10 folds; blending it with our allfreq is the current best scored file.
 
 ## Task
 
